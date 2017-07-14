@@ -36,7 +36,7 @@ ENV JULIA_PKGDIR $JULIA_PATH/share/julia/site
 
 RUN mkdir /tools
 
-ENV MENTALIST_VERSION 1.0.0
+ENV MENTALIST_VERSION 0.1.0
 
 WORKDIR /tmp
 RUN curl -o MentaLiST-${MENTALIST_VERSION}.tar.gz https://github.com/WGS-TB/MentaLiST/archive/v${MENTALIST_VERSION}.tar.gz
