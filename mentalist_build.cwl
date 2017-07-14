@@ -1,12 +1,12 @@
 cwlVersion: v1.0
 class: CommandLineTool
-baseCommand: julia /tool/build_db.jl
+baseCommand: julia /tools/MentaLiST/src/MentaLiST.jl build_db
 inputs:
-  output_filename:
+  kmer_database:
     type: string
     inputBinding:
       position: 1
-      prefix: -o
+      prefix: --db
   kmer_size:
     type: int
     inputBinding:
@@ -22,4 +22,4 @@ outputs:
   kmer_db:
     type: File
     outputBinding:
-      glob: $(inputs.output_filename)
+      glob: $(inputs.kmer_database)
