@@ -34,21 +34,27 @@ RUN apt-get update \
 
 ENV JULIA_PKGDIR $JULIA_PATH/share/julia/site
 
-RUN mkdir /tool
-RUN mkdir /tool/.OpenGene
+RUN mkdir /tools
 
-ENV HOME /tool
+ENV MENTALIST_VERSION 1.0.0
+
+WORKDIR /tmp
+RUN curl -o MentaLiST-${MENTALIST_VERSION}.tar.gz https://github.com/WGS-TB/MentaLiST/archive/v${MENTALIST_VERSION}.tar.gz
+RUN tar -xvzf MentaLiST-${MENTALIST_VERSION}.tar.gz
+WORKDIR /tools
+RUN cp -r /tmp/MentaLiST .
+
+ENV HOME /tools/MentaLiST
+
+RUN mkdir $HOME/.OpenGene
 
 RUN julia -e 'Pkg.init()'
 RUN julia -e 'Pkg.add("Bio")'
 RUN julia -e 'Pkg.add("OpenGene")'
 RUN julia -e 'Pkg.add("Logging")'
 RUN julia -e 'Pkg.add("ArgParse")'
+RUN julia -e 'Pkg.add("Lumberjack")'
 
-ENV MENTALIST_VERSION 0.0.0
 
-WORKDIR /tmp
-RUN curl -o MentaLiST-${MENTALIST_VERSION}.tar.gz https://github.com/WGS-TB/MentaLiST/archive/v${MENTALIST_VERSION}.tar.gz
-RUN tar -xvzf MentaLiST-${MENTALIST_VERSION}.tar.gz
-WORKDIR /tool
-RUN cp /tmp/MentaLiST/src/* .
+
+
