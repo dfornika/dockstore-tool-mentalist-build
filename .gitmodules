@@ -1,0 +1,3 @@
+[submodule "mentalist-dockerfile"]
+	path = mentalist-dockerfile
+	url = git@github.com:dfornika/mentalist-dockerfile.git
